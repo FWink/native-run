@@ -6,7 +6,7 @@
     "native-run": "bin/native-run"
   },
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "build": "npm run clean && tsc",
     "watch": "tsc -w",
     "test": "jest --maxWorkers=4",
@@ -17,12 +17,15 @@
     "publish:ci": "semantic-release",
     "publish:testing": "npm version prerelease --preid=testing --no-git-tag-version && npm publish --tag=testing && git stash",
     "prepublishOnly": "npm run build"
+    "postinstall": "npm run build"
   },
   "main": "dist/index.js",
   "files": [
     "assets",
     "bin",
-    "dist"
+    "dist",
+    "src",
+    "types"
   ],
   "engines": {
     "node": ">=16.0.0"
@@ -61,6 +64,7 @@
     "eslint": "^8.57.0",
     "jest": "^26.4.2",
     "prettier": "^3.0.3",
+    "rimraf": "^3.0.2",
     "semantic-release": "^19.0.5",
     "ts-jest": "^26.3.0",
     "typescript": "~4.9.5"
